@@ -75,11 +75,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Composite\BaseViewModel.cs" />
+    <Compile Include="Composite\BaseViewModelOfT.cs" />
+    <Compile Include="Composite\BaseViewModelOfTinTout.cs" />
+    <Compile Include="Composite\ObjectNullBoolConverter.cs" />
+    <Compile Include="Composite\StringNullOrEmptyVisibilityConverter.cs" />
     <Compile Include="Events\CredentialsChangedEvent.cs" />
+    <Compile Include="Extensions\BaseViewModelExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensionMethods.cs" />
     <Compile Include="Services\Client.cs" />
     <Compile Include="Services\Client.Generated.cs" />
     <Compile Include="Services\SettingsService.cs" />
-    <Compile Include="ViewModels\ChoicesViewModel.cs" />
+    <Compile Include="ViewModels\ChoiceEntryViewModel.cs" />
+    <Compile Include="ViewModels\ChoicesPageViewModel.cs" />
+    <Compile Include="ViewModels\DesignTime\ChoiceViewModelDesignTime.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\ChoicesPage.xaml.cs">
       <DependentUpon>ChoicesPage.xaml</DependentUpon>
@@ -124,7 +132,7 @@
       <Version>13.0.1</Version>
     </PackageReference>
     <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
-    <PackageReference Include="PropertyChanged.Fody">
+    <PackageReference Include="PropertyChanged.Fody" PrivateAssets="All">
       <Version>3.3.3</Version>
     </PackageReference>
   </ItemGroup>

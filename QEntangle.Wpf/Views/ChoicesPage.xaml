@@ -4,10 +4,58 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:designTime="clr-namespace:QEntangle.Wpf.ViewModels.DesignTime" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:comp="clr-namespace:QEntangle.Wpf.Composite"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
-             prism:ViewModelLocator.AutoWireViewModel="True">
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DataContext ="{d:DesignInstance {x:Type designTime:ChoiceViewModelDesignTime}, IsDesignTimeCreatable=True}">
   <Grid>
-    <Label Content="Test"/>
+    <Grid.Resources>
+      <ResourceDictionary>
+        <comp:StringNullOrEmptyVisibilityConverter x:Key="StringNullOrEmptyVisibilityConverter" />
+      </ResourceDictionary>
+    </Grid.Resources>
+    <ScrollViewer>
+      <StackPanel>
+        <ItemsControl ItemsSource="{Binding Entries}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Grid Background="{StaticResource MahApps.Brushes.Gray8}"  Margin="3">
+                <StackPanel Margin="3">
+                  <TextBlock Text="{Binding Name}" FontSize="16" TextWrapping="Wrap" Margin="3" Foreground="White" />
+                  <ItemsControl ItemsSource="{Binding Options}">
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                      </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate>
+                        <Grid Background="{StaticResource MahApps.Brushes.Gray3}" Margin="3">
+                          <Label Content="{Binding}" />
+                        </Grid>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </StackPanel>
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Grid Background="{StaticResource MahApps.Brushes.Gray8}" Margin="3" Visibility="{Binding NewItemEditorVisibility}">
+          <StackPanel Margin="3">
+            <Label Content="Name\Description:"/>
+            <TextBox Margin="3" TextWrapping="Wrap" Text="{Binding Path=NewItemName,Mode=TwoWay}"/>
+            <Label Content="Options (Seperated by ','):"/>
+            <TextBox Margin="3" TextWrapping="Wrap" Text="{Binding Path=NewItemOptions,Mode=TwoWay}"/>
+            <Button Margin="3" Style="{StaticResource MahApps.Styles.Button.Square}" HorizontalAlignment="Right" Content="create" Command="{Binding CreateNewItemCommand}"/>
+            <Label Content="{Binding NewItemPostMessage}" Foreground="Red" Visibility="{Binding NewItemPostMessage,Converter={StaticResource StringNullOrEmptyVisibilityConverter}}"/>
+          </StackPanel>
+        </Grid>
+        <mah:ProgressRing Foreground="{StaticResource MahApps.Brushes.Gray3}"
+                  IsActive="True" 
+                  Visibility="{Binding NewItemEditorPostIndicator}"/>
+      </StackPanel>
+    </ScrollViewer>
   </Grid>
 </UserControl>

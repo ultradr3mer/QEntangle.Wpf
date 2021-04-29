@@ -21,7 +21,7 @@ namespace QEntangle.Wpf
 
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
-      containerRegistry.RegisterSingleton<ChoicesViewModel>();
+      containerRegistry.RegisterSingleton<ChoicesPageViewModel>();
 
       containerRegistry.Register<HttpClient, CustomHttpClient>();
     }

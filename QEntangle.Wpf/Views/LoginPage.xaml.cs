@@ -16,14 +16,14 @@ namespace QEntangle.Wpf.Views
 
     private readonly Client client;
     private readonly IRegionManager regionManager;
-    private readonly ChoicesViewModel choicesViewModel;
+    private readonly ChoicesPageViewModel choicesViewModel;
     private readonly SettingsService settingsService;
 
     #endregion Fields
 
     #region Constructors
 
-    public LoginPage(SettingsService settingsService, Client client, IRegionManager regionManager, ChoicesViewModel choicesViewModel)
+    public LoginPage(SettingsService settingsService, Client client, IRegionManager regionManager, ChoicesPageViewModel choicesViewModel)
     {
       InitializeComponent();
 
