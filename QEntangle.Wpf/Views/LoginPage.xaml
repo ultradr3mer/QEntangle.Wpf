@@ -21,7 +21,7 @@
       <TextBlock x:Name="message" Visibility="Collapsed"/>
     </StackPanel>
     <StackPanel Name="LoadingStackPanel" VerticalAlignment="Center" Visibility="Collapsed">
-      <Label Content="" FontFamily="Segoe MDL2 Assets" FontSize="128" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+      <Image Source="QIcon.png" Width="150" Height="150" />
       <mah:ProgressRing Foreground="White"
                   IsActive="True" />
     </StackPanel>

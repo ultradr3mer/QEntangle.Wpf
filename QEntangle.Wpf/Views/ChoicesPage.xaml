@@ -23,34 +23,63 @@
               <Grid Background="{StaticResource MahApps.Brushes.Gray8}"  Margin="3">
                 <StackPanel Margin="3">
                   <TextBlock Text="{Binding Name}" FontSize="16" TextWrapping="Wrap" Margin="3" Foreground="White" />
-                  <ItemsControl ItemsSource="{Binding Options}">
-                    <ItemsControl.ItemsPanel>
-                      <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" />
-                      </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                      <DataTemplate>
-                        <Grid Background="{StaticResource MahApps.Brushes.Gray3}" Margin="3">
-                          <Label Content="{Binding}" />
-                        </Grid>
-                      </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                  </ItemsControl>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ItemsControl ItemsSource="{Binding Options}">
+                      <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                          <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                      </ItemsControl.ItemsPanel>
+                      <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                          <Grid Background="{StaticResource MahApps.Brushes.Gray3}" Margin="3">
+                            <Label Content="{Binding}" />
+                          </Grid>
+                        </DataTemplate>
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Button Content="" 
+                            Grid.Column="1" 
+                            Style="{StaticResource MahApps.Styles.Button.Square}" 
+                            FontFamily="Segoe MDL2 Assets" 
+                            FontSize="24"
+                            Margin="3"
+                            VerticalAlignment="Bottom"
+                            Command="{Binding ExecuteChoiceCommand}"/>
+                  </Grid>
                 </StackPanel>
               </Grid>
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>
         <Grid Background="{StaticResource MahApps.Brushes.Gray8}" Margin="3" Visibility="{Binding NewItemEditorVisibility}">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
           <StackPanel Margin="3">
             <Label Content="Name\Description:"/>
             <TextBox Margin="3" TextWrapping="Wrap" Text="{Binding Path=NewItemName,Mode=TwoWay}"/>
             <Label Content="Options (Seperated by ','):"/>
             <TextBox Margin="3" TextWrapping="Wrap" Text="{Binding Path=NewItemOptions,Mode=TwoWay}"/>
-            <Button Margin="3" Style="{StaticResource MahApps.Styles.Button.Square}" HorizontalAlignment="Right" Content="create" Command="{Binding CreateNewItemCommand}"/>
-            <Label Content="{Binding NewItemPostMessage}" Foreground="Red" Visibility="{Binding NewItemPostMessage,Converter={StaticResource StringNullOrEmptyVisibilityConverter}}"/>
+            <Label Content="{Binding NewItemPostMessage}" 
+                 Foreground="Red" 
+                 Visibility="{Binding NewItemPostMessage,Converter={StaticResource StringNullOrEmptyVisibilityConverter}}"
+                 Grid.Row="1" Grid.ColumnSpan="2"/>
           </StackPanel>
+          <Button Margin="6" 
+                  Style="{StaticResource MahApps.Styles.Button.Square}" 
+                  HorizontalAlignment="Right" 
+                  Content="" 
+                  Command="{Binding CreateNewItemCommand}" 
+                  FontFamily="Segoe MDL2 Assets" 
+                  FontSize="24"
+                  Grid.Column="1"
+                  VerticalAlignment="Bottom"/>
         </Grid>
         <mah:ProgressRing Foreground="{StaticResource MahApps.Brushes.Gray3}"
                   IsActive="True" 

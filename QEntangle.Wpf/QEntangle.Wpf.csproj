@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>QIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -82,6 +85,7 @@
     <Compile Include="Events\CredentialsChangedEvent.cs" />
     <Compile Include="Extensions\BaseViewModelExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensionMethods.cs" />
+    <Compile Include="Interop\WindowBlur.cs" />
     <Compile Include="Services\Client.cs" />
     <Compile Include="Services\Client.Generated.cs" />
     <Compile Include="Services\SettingsService.cs" />
@@ -136,6 +140,11 @@
       <Version>3.3.3</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Views\QIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="QIcon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
