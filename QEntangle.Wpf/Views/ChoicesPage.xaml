@@ -1,10 +1,12 @@
 ﻿<UserControl x:Class="QEntangle.Wpf.Views.ChoicesPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:designTime="clr-namespace:QEntangle.Wpf.ViewModels.DesignTime" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:comp="clr-namespace:QEntangle.Wpf.Composite"
+             xmlns:comp="clr-namespace:QEntangle.Wpf.Composite"
+             xmlns:designTime="clr-namespace:QEntangle.Wpf.ViewModels.DesignTime"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              prism:ViewModelLocator.AutoWireViewModel="True"
@@ -20,14 +22,14 @@
         <ItemsControl ItemsSource="{Binding Entries}">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
-              <Grid Background="{StaticResource MahApps.Brushes.Gray8}"  Margin="3">
-                <StackPanel Margin="3">
-                  <TextBlock Text="{Binding Name}" FontSize="16" TextWrapping="Wrap" Margin="3" Foreground="White" />
-                  <Grid>
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="*"/>
-                      <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+              <Border Background="{StaticResource MahApps.Brushes.Gray8}" Margin="3" CornerRadius="3">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+                  <StackPanel Margin="3">
+                    <TextBlock Text="{Binding Name}" FontSize="16" TextWrapping="Wrap" Foreground="White" Margin="3" />
                     <ItemsControl ItemsSource="{Binding Options}">
                       <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -36,54 +38,56 @@
                       </ItemsControl.ItemsPanel>
                       <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                          <Grid Background="{StaticResource MahApps.Brushes.Gray3}" Margin="3">
-                            <Label Content="{Binding}" />
-                          </Grid>
+                          <Border Background="{StaticResource MahApps.Brushes.Gray3}" Margin="3" CornerRadius="13" MinWidth="26">
+                            <Label Content="{Binding}" HorizontalAlignment="Center" Margin="3,0" />
+                          </Border>
                         </DataTemplate>
                       </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <Button Content="" 
-                            Grid.Column="1" 
-                            Style="{StaticResource MahApps.Styles.Button.Square}" 
-                            FontFamily="Segoe MDL2 Assets" 
-                            FontSize="24"
+                  </StackPanel>
+                  <Button Content=""
+                            Grid.Column="1"
+                            Style="{StaticResource MahApps.Styles.Button.SquareFine}"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="18"
                             Margin="3"
                             VerticalAlignment="Bottom"
-                            Command="{Binding ExecuteChoiceCommand}"/>
-                  </Grid>
-                </StackPanel>
-              </Grid>
+                            Command="{Binding ExecuteChoiceCommand}" Width="32" Height="32" />
+                </Grid>
+              </Border>
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Grid Background="{StaticResource MahApps.Brushes.Gray8}" Margin="3" Visibility="{Binding NewItemEditorVisibility}">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-          </Grid.ColumnDefinitions>
-          <StackPanel Margin="3">
-            <Label Content="Name\Description:"/>
-            <TextBox Margin="3" TextWrapping="Wrap" Text="{Binding Path=NewItemName,Mode=TwoWay}"/>
-            <Label Content="Options (Seperated by ','):"/>
-            <TextBox Margin="3" TextWrapping="Wrap" Text="{Binding Path=NewItemOptions,Mode=TwoWay}"/>
-            <Label Content="{Binding NewItemPostMessage}" 
-                 Foreground="Red" 
+        <Border Background="{StaticResource MahApps.Brushes.Gray8}" Margin="3" CornerRadius="3" Visibility="{Binding NewItemEditorVisibility}">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="3">
+              <Label Content="Name\Description:" />
+              <TextBox Margin="3" TextWrapping="Wrap" Text="{Binding Path=NewItemName,Mode=TwoWay}" />
+              <Label Content="Options (Seperated by ','):" />
+              <TextBox Margin="3" TextWrapping="Wrap" Text="{Binding Path=NewItemOptions,Mode=TwoWay}" />
+              <Label Content="{Binding NewItemPostMessage}"
+                 Foreground="Red"
                  Visibility="{Binding NewItemPostMessage,Converter={StaticResource StringNullOrEmptyVisibilityConverter}}"
-                 Grid.Row="1" Grid.ColumnSpan="2"/>
-          </StackPanel>
-          <Button Margin="6" 
-                  Style="{StaticResource MahApps.Styles.Button.Square}" 
-                  HorizontalAlignment="Right" 
-                  Content="" 
-                  Command="{Binding CreateNewItemCommand}" 
-                  FontFamily="Segoe MDL2 Assets" 
-                  FontSize="24"
+                 Grid.Row="1" Grid.ColumnSpan="2" />
+            </StackPanel>
+            <Button Margin="6"
+                  Style="{StaticResource MahApps.Styles.Button.SquareFine}"
+                  HorizontalAlignment="Right"
+                  Content=""
+                  Command="{Binding CreateNewItemCommand}"
+                  FontFamily="Segoe MDL2 Assets"
+                  FontSize="18"
                   Grid.Column="1"
-                  VerticalAlignment="Bottom"/>
-        </Grid>
+                  VerticalAlignment="Bottom" Width="32" Height="32" />
+          </Grid>
+        </Border>
         <mah:ProgressRing Foreground="{StaticResource MahApps.Brushes.Gray3}"
-                  IsActive="True" 
-                  Visibility="{Binding NewItemEditorPostIndicator}"/>
+                  IsActive="True"
+                  Visibility="{Binding NewItemEditorPostIndicator}" />
       </StackPanel>
     </ScrollViewer>
   </Grid>
