@@ -19,45 +19,6 @@
     </Grid.Resources>
     <ScrollViewer>
       <StackPanel>
-        <ItemsControl ItemsSource="{Binding Entries}">
-          <ItemsControl.ItemTemplate>
-            <DataTemplate>
-              <Border Background="{StaticResource MahApps.Brushes.Gray8}" Margin="3" CornerRadius="3">
-                <Grid>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                  </Grid.ColumnDefinitions>
-                  <StackPanel Margin="3">
-                    <TextBlock Text="{Binding Name}" FontSize="16" TextWrapping="Wrap" Foreground="White" Margin="3" />
-                    <ItemsControl ItemsSource="{Binding Options}">
-                      <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                          <WrapPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                      </ItemsControl.ItemsPanel>
-                      <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                          <Border Background="{StaticResource MahApps.Brushes.Gray3}" Margin="3" CornerRadius="13" MinWidth="26">
-                            <Label Content="{Binding}" HorizontalAlignment="Center" Margin="3,0" />
-                          </Border>
-                        </DataTemplate>
-                      </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                  </StackPanel>
-                  <Button Content=""
-                            Grid.Column="1"
-                            Style="{StaticResource MahApps.Styles.Button.SquareFine}"
-                            FontFamily="Segoe MDL2 Assets"
-                            FontSize="18"
-                            Margin="3"
-                            VerticalAlignment="Bottom"
-                            Command="{Binding ExecuteChoiceCommand}" Width="32" Height="32" />
-                </Grid>
-              </Border>
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
         <Border Background="{StaticResource MahApps.Brushes.Gray8}" Margin="3" CornerRadius="3" Visibility="{Binding NewItemEditorVisibility}">
           <Grid>
             <Grid.ColumnDefinitions>
@@ -88,6 +49,54 @@
         <mah:ProgressRing Foreground="{StaticResource MahApps.Brushes.Gray3}"
                   IsActive="True"
                   Visibility="{Binding NewItemEditorPostIndicator}" />
+        <ItemsControl ItemsSource="{Binding Entries}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Border Background="{StaticResource MahApps.Brushes.Gray8}" Margin="3" CornerRadius="3">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+                  <StackPanel Margin="3">
+                    <TextBlock Text="{Binding Name}" FontSize="16" TextWrapping="Wrap" Foreground="White" Margin="3" />
+                    <Grid>
+                    <ItemsControl ItemsSource="{Binding Options}">
+                      <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                          <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                      </ItemsControl.ItemsPanel>
+                      <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                          <Border Background="{Binding Background}" Margin="3" CornerRadius="13" MinWidth="26">
+                            <Label Content="{Binding Name}" HorizontalAlignment="Center" Margin="3,0" />
+                          </Border>
+                        </DataTemplate>
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <mah:MetroProgressBar 
+                      Margin="4"
+                      IsIndeterminate="True"
+                      Foreground="{DynamicResource MahApps.Brushes.AccentBase}"
+                      Visibility="{Binding ProgressBarVisibility}"/>
+                    </Grid>
+                  </StackPanel>
+                  <Button Content=""
+                          Grid.Column="1"
+                          Style="{StaticResource MahApps.Styles.Button.SquareFine}"
+                          FontFamily="Segoe MDL2 Assets"
+                          FontSize="18"
+                          Margin="6"
+                          VerticalAlignment="Bottom"
+                          Command="{Binding ExecuteChoiceCommand}" Width="32" Height="32" 
+                          Visibility="{Binding ExecuteVisibility}"
+                          IsEnabled="{Binding IsExecuteEnabled}"/>
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
       </StackPanel>
     </ScrollViewer>
   </Grid>

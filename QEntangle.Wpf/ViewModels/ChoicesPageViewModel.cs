@@ -48,7 +48,7 @@ namespace QEntangle.Wpf.ViewModels
     public async Task Refresh()
     {
       System.Collections.Generic.ICollection<ChoiceGetData> data = await this.client.ChoiceGetAsync();
-      System.Collections.Generic.List<ChoiceEntryViewModel> list = data.Select(o => this.container.Resolve<ChoiceEntryViewModel>().GetWithDataModel(o)).ToList();
+      System.Collections.Generic.List<ChoiceEntryViewModel> list = data.Select(o => this.container.Resolve<ChoiceEntryViewModel>().GetWithDataModel(o)).Reverse().ToList();
       this.Entries = new BindingList<ChoiceEntryViewModel>(list);
     }
 
@@ -64,7 +64,7 @@ namespace QEntangle.Wpf.ViewModels
           Options = this.NewItemOptions
         };
         ChoiceGetData newItem = await this.client.ChoicePostAsync(body);
-        this.Entries.Add(this.container.Resolve<ChoiceEntryViewModel>().GetWithDataModel(newItem));
+        this.Entries.Insert(0, this.container.Resolve<ChoiceEntryViewModel>().GetWithDataModel(newItem));
         this.NewItemName = string.Empty;
         this.NewItemOptions = string.Empty;
       }
